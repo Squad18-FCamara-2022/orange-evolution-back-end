@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["es6"],
+    "module": "commonjs",                               
+    "typeRoots": ["./node_modules/@types"],
+    "allowJs": true,
+    "removeComments": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,         
+    "strict": false,
+    "skipLibCheck": true
+  }
+}
