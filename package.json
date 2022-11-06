@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev --respawn --exit-child src/server.ts"
+    "dev": "ts-node-dev --respawn --exit-child src/server.ts",
+    "start": "node server.ts"
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
