@@ -4,6 +4,7 @@
     "lib": [
       "es6"
     ],
+    "outDir": "dist",
     "module": "commonjs",
     "typeRoots": [
       "./node_modules/@types"
