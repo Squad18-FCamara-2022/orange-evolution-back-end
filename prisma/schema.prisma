@@ -15,80 +15,19 @@ enum Role {
   user
 }
 
-enum Status {
-  in_progress
-  finished
-}
-
 /// Modelo do usuário
 model User {
   /// Id do usuário
-  id             Int              @id @default(autoincrement())
+  id       String @id @default(cuid())
   /// Email do usuário
-  email          String           @unique
+  email    String @unique
   /// Nome do usuário
-  name           String
+  name     String
   /// senha do usuário
-  password       String
+  password String
   /// Cargo do usuário
-  role           Role             @default(user)
+  role     Role   @default(user)
+
   /// Momento da criação do usuário
-  createdAt      DateTime         @default(now())
-  UsersOnClasses UsersOnClasses[]
-}
-
-/// Modelo da Trilha
-model Track {
-  /// Id da trilha
-  id          Int      @unique @default(autoincrement())
-  /// Dome da trilha
-  name        String
-  /// Descrição da trilha
-  description String
-  /// Momento de criação da trilha
-  createdAt   DateTime @default(now())
-  /// Criador da trilha
-  author      String
-}
-
-/// Modelo da Categoria
-model Category {
-  /// Id da Categoria
-  id   Int    @unique @default(autoincrement())
-  /// Nome da categoria
-  name String
-
-  classes Class[]
-}
-
-/// Modelo da Aula
-model Class {
-  /// Id da aula
-  id          Int      @unique @default(autoincrement())
-  /// Tipo do conteúdo da aula
-  contentType String
-  /// Autor da aula
-  author      String
-  /// duaração da aula em segundos
-  duration    Int
-  /// link para acessar a aula
-  link        String
-  /// momento de criação aula
-  createdAt   DateTime @default(now())
-
-  /// Id da categoria que a aula pertence
-  categoryId     Int
-  Category       Category         @relation(fields: [categoryId], references: [id])
-  UsersOnClasses UsersOnClasses[]
-}
-
-/// https://www.prisma.io/docs/concepts/components/prisma-schema/relations/many-to-many-relations#explicit-many-to-many-relations
-model UsersOnClasses {
-  classId Int
-  class   Class  @relation(fields: [classId], references: [id])
-  userId  Int
-  user    User   @relation(fields: [userId], references: [id])
-  status  Status
-
-  @@id([classId, userId])
+  createdAt DateTime @default(now())
 }
