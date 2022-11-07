@@ -11,6 +11,11 @@ interface ICreateUserAccountService {
 
 interface ICreateAccounResponse {
   token: string;
+  user: {
+    id: string;
+    name: string;
+    role: string;
+  };
 }
 
 class CreateUserAccountService {
@@ -72,7 +77,14 @@ class CreateUserAccountService {
       }
     );
 
-    return { token: token };
+    return {
+      token,
+      user: {
+        id: user.id,
+        name: user.name,
+        role: user.role,
+      },
+    };
   }
 }
 
