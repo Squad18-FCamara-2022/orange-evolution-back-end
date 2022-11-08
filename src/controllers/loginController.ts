@@ -1,4 +1,4 @@
-import { Request, Response } from "express-serve-static-core";
+import { Request, Response } from "express";
 import { LoginService } from "../services/LoginService";
 import { AppError } from "../utils/AppError";
 
