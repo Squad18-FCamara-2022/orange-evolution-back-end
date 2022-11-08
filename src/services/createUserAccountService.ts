@@ -38,22 +38,25 @@ class CreateUserAccountService {
 
     // verificar se password e confirmPassword são iguais
     if (password !== confirmPassword) {
-      throw new AppError("confirmPassword different from password");
+      throw new AppError("confirmPassword different from password", 422);
     }
 
-    // verificar se o usuário já existe no banco (pelo email)
+    // verificar se o usuário já existe no banco de dados (pelo email)
+    // prisma, na tabela usuário encontre o primeiro usuário onde o email seja igual ao email recebido na request
     const userAlreadyExists = await prisma.user.findFirst({
       where: {
         email: email,
       },
     });
 
-    // se existir retornar um erro
+    // se existir um usuáo retornar um erro
+    // se userAlreadyExists diferente de falso, retornar um erro
     if (userAlreadyExists) {
       throw new AppError("Email already in use", 409);
     }
 
     // criar usuário sem encriptar senha
+    // prisma, por gentileza, na tabela usuário crie um novo usuário com os seguinte dados...
     const user = await prisma.user.create({
       data: {
         email,
@@ -62,7 +65,7 @@ class CreateUserAccountService {
       },
     });
 
-    // criar token JWT
+    // gerar um token JWT com o método sign() do jsonwebtoken
     const token = sign(
       {
         user: {
@@ -77,6 +80,7 @@ class CreateUserAccountService {
       }
     );
 
+    // retornar para o controller as informaçõs do usuário com o token
     return {
       token,
       user: {

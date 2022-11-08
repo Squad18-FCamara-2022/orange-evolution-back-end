@@ -1,22 +1,19 @@
-import { Request, Response } from "express";
-import { CreateUserAccountService } from "../services/createUserAccountService";
+import { Request, Response } from "express-serve-static-core";
+import { LoginService } from "../services/LoginService";
 import { AppError } from "../utils/AppError";
 
-class CreateUserAccountController {
-  // método handle (uma função) que recebe a req e res
+class LoginController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const { name, email, password, confirmPassword } = request.body;
+      const { email, password } = request.body;
 
-      // instanciar camada de serviço
-      const service = new CreateUserAccountService();
+      // instanciar a camada de serviço
+      const service = new LoginService();
 
       // result guarda as informaçôes que o service vai retornar, por exemplo o Token
       const result = await service.execute({
-        name,
         email,
         password,
-        confirmPassword,
       });
 
       return response.status(200).json(result);
@@ -30,4 +27,4 @@ class CreateUserAccountController {
   }
 }
 
-export { CreateUserAccountController };
+export { LoginController };
