@@ -21,6 +21,7 @@ class CreateUserAccountController {
 
       return response.status(200).json(result);
     } catch (error) {
+      console.log(error);
       if (error instanceof AppError) {
         return response.status(error.statusCode).json({ error: error.message });
       } else {
