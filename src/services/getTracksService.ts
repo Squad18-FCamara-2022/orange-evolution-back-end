@@ -1,5 +1,5 @@
 import { Track } from "@prisma/client";
-import { AppError } from "../utils/AppError";
+import prisma from "../prisma";
 
 class GetTracksService {
   async execute(): Promise<Track[]> {
