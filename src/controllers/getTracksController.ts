@@ -1,21 +1,18 @@
 import { Request, Response } from "express";
-import { LoginService } from "../services/LoginService";
+import { GetTracksService } from "../services/getTracksService";
 import { AppError } from "../utils/AppError";
 
-class LoginController {
+class GetTracksController {
+  // metodo hadle (uma função) que recebe a req e res
   async handle(request: Request, response: Response): Promise<Response> {
     try {
-      const { email, password } = request.body;
+      // instanciar camada de serviço
+      const service = new GetTracksService();
 
-      // instanciar a camada de serviço
-      const service = new LoginService();
+      // result guarda as informações que o service vai retornar, por exemplo o token
+      const result = await service.execute();
 
-      // result guarda as informaçôes que o service vai retornar, por exemplo o Token
-      const result = await service.execute({
-        email,
-        password,
-      });
-
+      // retornar para o front o resultado (um array de tracks)
       return response.status(200).json(result);
     } catch (error) {
       console.log(error);
@@ -28,4 +25,4 @@ class LoginController {
   }
 }
 
-export { LoginController };
+export { GetTracksController };
