@@ -15,6 +15,12 @@ enum Role {
   user
 }
 
+//
+enum Status {
+  not_started
+  finished
+}
+
 /// Modelo do usuário
 model User {
   /// Id do usuário
@@ -30,4 +36,73 @@ model User {
 
   /// Momento da criação do usuário
   createdAt DateTime @default(now())
+
+  /// aulas que o usuário concluiu
+  UsersOnClasses UsersOnClasses[]
+}
+
+/// Modelo da Trilha
+model Track {
+  /// Id da trilha
+  id          String   @unique @default(cuid())
+  /// Dome da trilha
+  name        String
+  /// Descrição da trilha
+  description String
+  /// Momento de criação da trilha
+  createdAt   DateTime @default(now())
+  /// Criador da trilha
+  author      String
+
+  /// categorias que a trilha tem
+  categories Category[]
+}
+
+/// Modelo da Categoria
+model Category {
+  /// Id da Categoria
+  id   String @unique @default(cuid())
+  /// Nome da categoria
+  name String
+
+  /// Id da trilha que aula pertence
+  trackId String
+  Track   Track  @relation(fields: [trackId], references: [id])
+
+  /// aulas que essa categoria tem
+  classes Class[]
+}
+
+/// Modelo da Aula
+model Class {
+  /// Id da aula
+  id          String   @unique @default(cuid())
+  /// Tipo do conteúdo da aula
+  contentType String
+  /// Autor da aula
+  author      String
+  /// duaração da aula em segundos
+  duration    Int
+  /// link para acessar a aula
+  link        String
+  /// momento de criação aula
+  createdAt   DateTime @default(now())
+
+  /// Id da categoria que a aula pertence
+  categoryId String
+  Category   Category @relation(fields: [categoryId], references: [id])
+
+  /// usuários que já concluíram a aula
+  UsersOnClasses UsersOnClasses[]
+}
+
+/// tabela de relação muitos pra muitos entre aulas e usuários
+model UsersOnClasses {
+  classId String
+  class   Class  @relation(fields: [classId], references: [id])
+  userId  String
+  user    User   @relation(fields: [userId], references: [id])
+  status  Status @default(not_started)
+
+  @@id([classId, userId])
 }
