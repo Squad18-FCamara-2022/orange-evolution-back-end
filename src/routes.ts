@@ -3,6 +3,7 @@ import { CreateUserAccountController } from "./controllers/createUserAccontContr
 import { LoginController } from "./controllers/loginController";
 import { GetTracksController } from "./controllers/getTracksController";
 import { GetCategoriesController } from "./controllers/getCategoriesController";
+import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
 
 // defino a variável router que vai representar o Router que vem do express
 const router = Router();
@@ -14,9 +15,13 @@ router.post("/signup", new CreateUserAccountController().handle);
 router.post("/login", new LoginController().handle);
 
 // rota de busca das trilhas
-router.get("/gettracks", new GetTracksController().handle);
+router.get("/getTracks", ensureAuthenticated, new GetTracksController().handle);
 
 // rota de busca das categorias (as aulas vão junto)
-router.get("/getcategories/:id", new GetCategoriesController().handle);
+router.get(
+  "/getCategories/:id",
+  ensureAuthenticated,
+  new GetCategoriesController().handle
+);
 
 export { router };
