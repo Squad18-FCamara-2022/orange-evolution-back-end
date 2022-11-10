@@ -5,6 +5,7 @@ import { GetUserTrackController } from "./controllers/users/getUserTrackControll
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
 import { DeleteUserClassController } from "./controllers/users/deleteUserClassController";
 import { CreateUserClassController } from "./controllers/users/createUserClassController";
+import { GetTracksAdminController } from "./controllers/admins/getTrakcsAdminController";
 
 // defino a variável router que vai representar o Router que vem do express
 const router = Router();
@@ -34,6 +35,13 @@ router.delete(
   "/deleteUserClass/:id",
   ensureAuthenticated,
   new DeleteUserClassController().handle
+);
+
+// rota para o admin buscar todas as aulas de todas as trilhas
+router.get(
+  "/getTracksAdmin",
+  ensureAuthenticated,
+  new GetTracksAdminController().handle
 );
 
 export { router };
