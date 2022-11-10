@@ -3,6 +3,8 @@ import { CreateUserAccountController } from "./controllers/createUserAccontContr
 import { LoginController } from "./controllers/loginController";
 import { GetUserTrackController } from "./controllers/getUserTrackController";
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
+import { DeleteUserClassController } from "./controllers/deleteUserClassController";
+import { CreateUserClassController } from "./controllers/createUserClassController";
 
 // defino a variável router que vai representar o Router que vem do express
 const router = Router();
@@ -18,6 +20,20 @@ router.get(
   "/getUserTrack/:id",
   ensureAuthenticated,
   new GetUserTrackController().handle
+);
+
+// rota para criar uma aula na tabela userOnClasses
+router.post(
+  "/createUserClass/:id",
+  ensureAuthenticated,
+  new CreateUserClassController().handle
+);
+
+// rota para deletar uma aula feita pelo usuário
+router.delete(
+  "/deleteUserClass/:id",
+  ensureAuthenticated,
+  new DeleteUserClassController().handle
 );
 
 export { router };

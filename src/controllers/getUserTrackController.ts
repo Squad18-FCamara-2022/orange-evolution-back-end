@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
-import { GetUserTrackService } from "../services/getTracksService";
+import { GetUserTrackService } from "../services/getUserTrackService";
 import { AppError } from "../utils/AppError";
 
-interface IGetUserTrackControllerRequest extends Request {
+interface IGetUserTrackRequest extends Request {
   userId: string;
 }
 
 class GetUserTrackController {
   // metodo hadle (uma função) que recebe a req e res
   async handle(
-    request: IGetUserTrackControllerRequest,
+    request: IGetUserTrackRequest,
     response: Response
   ): Promise<Response> {
     try {
