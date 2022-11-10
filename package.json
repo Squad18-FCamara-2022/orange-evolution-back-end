@@ -9,7 +9,7 @@
     "postinstall": "tsc"
   },
   "engines": {
-    "node": "16.13.0"
+    "node": "18.12.0"
   },
   "dependencies": {
     "@prisma/client": "^4.5.0",
