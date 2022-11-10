@@ -1,16 +1,27 @@
 import { Request, Response } from "express";
-import { GetTracksService } from "../services/getTracksService";
+import { GetUserTrackService } from "../services/getTracksService";
 import { AppError } from "../utils/AppError";
 
-class GetTracksController {
+interface IGetUserTrackControllerRequest extends Request {
+  userId: string;
+}
+
+class GetUserTrackController {
   // metodo hadle (uma função) que recebe a req e res
-  async handle(request: Request, response: Response): Promise<Response> {
+  async handle(
+    request: IGetUserTrackControllerRequest,
+    response: Response
+  ): Promise<Response> {
     try {
+      // id da trilha
+      const { id: trackId } = request.params;
+      const { userId } = request;
+
       // instanciar camada de serviço
-      const service = new GetTracksService();
+      const service = new GetUserTrackService();
 
       // result guarda as informações que o service vai retornar, por exemplo o token
-      const result = await service.execute();
+      const result = await service.execute(trackId, userId);
 
       // retornar para o front o resultado (um array de tracks)
       return response.status(200).json(result);
@@ -25,4 +36,4 @@ class GetTracksController {
   }
 }
 
-export { GetTracksController };
+export { GetUserTrackController };

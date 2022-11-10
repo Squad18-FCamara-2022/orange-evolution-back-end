@@ -15,12 +15,6 @@ enum Role {
   user
 }
 
-//
-enum Status {
-  not_started
-  finished
-}
-
 /// Modelo do usuário
 model User {
   /// Id do usuário
@@ -77,6 +71,8 @@ model Category {
 model Class {
   /// Id da aula
   id          String   @unique @default(cuid())
+  /// título da aula
+  title       String
   /// Tipo do conteúdo da aula
   contentType String
   /// Autor da aula
@@ -102,7 +98,6 @@ model UsersOnClasses {
   class   Class  @relation(fields: [classId], references: [id])
   userId  String
   user    User   @relation(fields: [userId], references: [id])
-  status  Status @default(not_started)
 
   @@id([classId, userId])
 }
