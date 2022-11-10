@@ -11,7 +11,7 @@ class LoginService {
     }
 
     // verificar se o usuário existe no banco de dados
-    // prisma, por gentileza, encontre o primeiro usuário com TAL email existe no banco e salve ele na constante "user"
+    // prisma, por gentileza, verifique se o primeiro usuário com TAL email existe no banco e salve ele na constante "user"
     const user = await prisma.user.findFirst({
       where: {
         email,
