@@ -1,10 +1,10 @@
 import { Router } from "express";
 import { CreateUserAccountController } from "./controllers/createUserAccontController";
 import { LoginController } from "./controllers/loginController";
-import { GetUserTrackController } from "./controllers/getUserTrackController";
+import { GetUserTrackController } from "./controllers/users/getUserTrackController";
 import { ensureAuthenticated } from "./middleware/ensureAuthenticated";
-import { DeleteUserClassController } from "./controllers/deleteUserClassController";
-import { CreateUserClassController } from "./controllers/createUserClassController";
+import { DeleteUserClassController } from "./controllers/users/deleteUserClassController";
+import { CreateUserClassController } from "./controllers/users/createUserClassController";
 
 // defino a variável router que vai representar o Router que vem do express
 const router = Router();

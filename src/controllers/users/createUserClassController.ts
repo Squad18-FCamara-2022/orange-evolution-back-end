@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { CreateUserClassService } from "../services/createUserClassService";
-import { AppError } from "../utils/AppError";
+import { CreateUserClassService } from "../../services/users/createUserClassService";
+import { AppError } from "../../utils/AppError";
 
 interface ICreateUserClassRequest extends Request {
   userId: string;

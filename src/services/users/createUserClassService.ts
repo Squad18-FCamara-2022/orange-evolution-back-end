@@ -1,5 +1,5 @@
-import { AppError } from "../utils/AppError";
-import prisma from "../prisma";
+import { AppError } from "../../utils/AppError";
+import prisma from "../../prisma";
 import { UsersOnClasses } from "@prisma/client";
 
 class CreateUserClassService {
