@@ -1,6 +1,5 @@
 import { AppError } from "../../utils/AppError";
 import prisma from "../../prisma";
-import { UsersOnClasses } from "@prisma/client";
 
 interface ICreateUserClassService {
   message: string;
