@@ -1,6 +1,6 @@
 import { Track, UsersOnClasses } from "@prisma/client";
-import prisma from "../prisma";
-import { AppError } from "../utils/AppError";
+import prisma from "../../prisma";
+import { AppError } from "../../utils/AppError";
 
 interface IGetUserTrackServiceResponse {
   trackDetails: Track;

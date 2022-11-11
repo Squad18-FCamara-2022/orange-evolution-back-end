@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { GetUserTrackService } from "../services/getUserTrackService";
-import { AppError } from "../utils/AppError";
+import { GetUserTrackService } from "../../services/users/getUserTrackService";
+import { AppError } from "../../utils/AppError";
 
 interface IGetUserTrackRequest extends Request {
   userId: string;

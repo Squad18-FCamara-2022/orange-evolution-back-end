@@ -1,9 +1,15 @@
-import { AppError } from "../utils/AppError";
-import prisma from "../prisma";
+import { AppError } from "../../utils/AppError";
+import prisma from "../../prisma";
 import { UsersOnClasses } from "@prisma/client";
 
+interface ICreateUserClassService {
+  message: string;
+}
 class CreateUserClassService {
-  async execute(userId: string, classId: string): Promise<UsersOnClasses> {
+  async execute(
+    userId: string,
+    classId: string
+  ): Promise<ICreateUserClassService> {
     // validar se os parâmetros foram recebidos
     if (!userId) {
       throw new AppError("userId not found on request param", 422);
@@ -42,14 +48,14 @@ class CreateUserClassService {
     }
 
     // criar aula no banco
-    const userOnclass = await prisma.usersOnClasses.create({
+    await prisma.usersOnClasses.create({
       data: {
         classId,
         userId,
       },
     });
 
-    return userOnclass;
+    return { message: "class created successfuly" };
   }
 }
 

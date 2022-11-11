@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { DeleteUserClassService } from "../services/deleteUserClassService";
-import { AppError } from "../utils/AppError";
+import { DeleteUserClassService } from "../../services/users/deleteUserClassService";
+import { AppError } from "../../utils/AppError";
 
 interface IDeleteUserClassRequest extends Request {
   userId: string;
