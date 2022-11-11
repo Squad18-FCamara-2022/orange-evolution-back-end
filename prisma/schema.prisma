@@ -95,9 +95,9 @@ model Class {
 /// tabela de relação muitos pra muitos entre aulas e usuários
 model UsersOnClasses {
   classId   String
-  class     Class    @relation(fields: [classId], references: [id])
+  class     Class    @relation(fields: [classId], references: [id], onDelete: Cascade)
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
 
   @@id([classId, userId])

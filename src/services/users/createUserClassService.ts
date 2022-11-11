@@ -54,7 +54,7 @@ class CreateUserClassService {
       },
     });
 
-    return { message: "class created successfuly" };
+    return { message: "class created successfully" };
   }
 }
 

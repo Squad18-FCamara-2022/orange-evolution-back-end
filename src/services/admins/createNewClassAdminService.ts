@@ -55,9 +55,9 @@ class CreateNewClassAdminService {
       },
     });
 
-    // se não for retornar um erro
+    // se não for admin retornar um erro
     if (!user) {
-      throw new AppError("only admin users can create new classes", 401);
+      throw new AppError("only admins users can create new classes", 401);
     }
 
     // criar aula no banco
@@ -72,7 +72,7 @@ class CreateNewClassAdminService {
       },
     });
 
-    return { message: "class created successfuly" };
+    return { message: "class created successfully" };
   }
 }
 

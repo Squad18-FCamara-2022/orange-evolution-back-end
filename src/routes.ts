@@ -7,6 +7,7 @@ import { DeleteUserClassController } from "./controllers/users/deleteUserClassCo
 import { CreateUserClassController } from "./controllers/users/createUserClassController";
 import { GetTracksAdminController } from "./controllers/admins/getTrakcsAdminController";
 import { CreateNewClassAdminController } from "./controllers/admins/createNewClassAdminController";
+import { DeleteClassAdminController } from "./controllers/admins/deleteClassAdminController";
 
 // defino a variável router que vai representar o Router que vem do express
 const router = Router();
@@ -50,6 +51,13 @@ router.post(
   "/createNewClassAdmin",
   ensureAuthenticated,
   new CreateNewClassAdminController().handle
+);
+
+// rota para o admin deletar uma aula
+router.delete(
+  "/deleteClassAdmin/:id",
+  ensureAuthenticated,
+  new DeleteClassAdminController().handle
 );
 
 export { router };
