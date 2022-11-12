@@ -26,7 +26,7 @@ class CreateNewClassAdminController {
         userId,
       });
 
-      return response.status(200).json(result);
+      return response.status(201).json(result);
     } catch (error) {
       console.log(error);
       if (error instanceof AppError) {

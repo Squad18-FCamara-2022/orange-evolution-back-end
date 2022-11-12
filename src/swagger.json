@@ -1,0 +1,91 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Orange Evolution SQD18 Documentation",
+        "description": "This is an API Education",
+        "version": "1.0.0",
+        "contact": {
+            "email": "squad18hackathonfcamara@gmail.com"
+        },
+        "url":"https://orange-evolution-sqd18-backend.herokuapp.com"
+    },
+    "servers": [{
+        "url": "https://orange-evolution-sqd18-backend.herokuapp.com",
+        "description": "Production server"
+    },
+    {
+        "url": "http://localhost:4000",
+        "description": "Local server"
+    }
+],
+    "paths": {
+        "/signup": {
+            "post": {
+                "tags": ["All"],
+                "summary": "Create a new account",
+                "description": "Create a new account on Orange Evolution SQD18 education platform.",
+                "requestBody": {
+                    "content": {
+                        "application/json" : {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "confirmPassword": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "Jhon Doe",
+                                    "email": "jhondoes@gmail.com",
+                                    "password": "123456",
+                                    "confirmPassword": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "example": {
+                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
+                                        "user": {
+                                            "id": "cla8uqcmz9091xk04ynowvarf",
+                                            "name": "Jhon Doe",
+                                            "role": "user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "token invalid or token expired"
+                    },
+                    "422": {
+                        "description": "Some request body params not found"
+                    },
+                    "409": {
+                        "description": "Email already in use"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                }
+            }
+        }
+    }
+}
