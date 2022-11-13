@@ -45,7 +45,7 @@
                                 },
                                 "example": {
                                     "name": "Jhon Doe",
-                                    "email": "jhondoes@gmail.com",
+                                    "email": "johndoe@gmail.com",
                                     "password": "123456",
                                     "confirmPassword": "123456"
                                 }
@@ -64,7 +64,7 @@
                                         "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
                                         "user": {
                                             "id": "cla8uqcmz9091xk04ynowvarf",
-                                            "name": "Jhon Doe",
+                                            "name": "John Doe",
                                             "role": "user"
                                         }
                                     }
@@ -80,6 +80,66 @@
                     },
                     "409": {
                         "description": "Email already in use"
+                    },
+                    "500": {
+                        "description": "Internal error"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "tags": ["All"],
+                "summary": "Login route",
+                "description": "Login on Orange Evolution Platform",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "object"
+                                    }
+                                },
+                                "example": {
+                                    "email": "johndoe@gmail.com",
+                                    "password": "123456"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "example": {
+                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
+                                        "user": {
+                                            "id": "cla8uqcmz9091xk04ynowvarf",
+                                            "name": "John Doe",
+                                            "role": "user"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "token invalid or token expired"
+                    },
+                    "422": {
+                        "description": "Some request body params not found"
+                    },
+                    "403": {
+                        "description": "Wrong Credentials"
                     },
                     "500": {
                         "description": "Internal error"
