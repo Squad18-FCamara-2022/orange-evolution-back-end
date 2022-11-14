@@ -72,9 +72,6 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "token invalid or token expired"
-                    },
                     "422": {
                         "description": "Some request body params not found"
                     },
@@ -82,7 +79,7 @@
                         "description": "Email already in use"
                     },
                     "500": {
-                        "description": "Internal error"
+                        "$ref": "#components/responses/InternalServerError"
                     }
                 }
             }
@@ -132,9 +129,6 @@
                             }
                         }
                     },
-                    "401": {
-                        "description": "token invalid or token expired"
-                    },
                     "422": {
                         "description": "Some request body params not found"
                     },
@@ -142,9 +136,145 @@
                         "description": "Wrong Credentials"
                     },
                     "500": {
-                        "description": "Internal error"
+                        "$ref": "#components/responses/InternalServerError"
                     }
                 }
+            }
+        },
+        "/getUserTrack/{id}":{
+            "get": {
+                "tags": ["Users"],
+                "summary": "Get User Track",
+                "description": "Get user content trail, with all classes in the trail and classes the user has already completed",
+                "security": [
+                    { "bearerAuth": []}
+                  ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of the content track that the user wants to fetch the classes",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "$ref":"#components/responses/GetUserTrackResponse"
+                    },
+                    "401": {
+                        "$ref": "#components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "track does not exist"
+                    },
+                    "500": {
+                        "$ref": "#components/responses/InternalServerError"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "Bearer",
+                "bearerFormat": "JWT"
+            }
+        },
+        "responses": {
+            "UnauthorizedError": {
+                "description": "Access token is missing or invalid"
+            },
+            "GetUserTrackResponse": {
+                "description": "success",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type":"object",
+                            "example": {
+                                "trackDetails": {
+                                    "id": "cla8uqcmz9091xk04hnobvarf",
+                                    "name": "FullStack",
+                                    "description": "Trilha para quem deseja aprender sobre desenvolvimento FullStack",
+                                    "createdAt": "2022-11-09T03:38:35.466Z",
+                                    "author": "Amanda Pazetti",
+                                    "categories": [
+                                        {
+                                            "id": "cla9uqcmz2022xk04ynowvarf",
+                                            "name": "Conceitos Básicos",
+                                            "TrackId": "cla8uqcmz9091xk04hnobvarf",
+                                            "classes": [
+                                                {
+                                                    "id":"cla2uqcmg1892xk04ynowlarf",
+                                                    "title": "Aula 1",
+                                                    "contentType": "Vídeo",
+                                                    "author": "Orange Evolution",
+                                                    "link": "www.youtube.com/orange-evolution",
+                                                    "createdAt": "2022-01-06T03:38:35.466Z",
+                                                    "categoryId": "cla9uqcmz2022xk04ynowvarf"
+                                                },
+                                                {
+                                                    "id":"cla2uqcmg8262xk04ynowlarf",
+                                                    "title": "Aula 2",
+                                                    "contentType": "Artigo",
+                                                    "author": "Orange Evolution",
+                                                    "link": "www.orangevolution.com",
+                                                    "createdAt": "2022-01-06T03:38:35.466Z",
+                                                    "categoryId": "cla9uqcmz2022xk04ynowvarf"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "id": "cla3uqcmz2242xk04ynowvarf",
+                                            "name": "Avançado",
+                                            "TrackId": "cla8uqcmz9091xk04hnobvarf",
+                                            "classes": [
+                                                {
+                                                    "id":"cla2uasfasg1892xk0gacowlarf",
+                                                    "title": "Aula 1",
+                                                    "contentType": "Vídeo",
+                                                    "author": "Orange Evolution",
+                                                    "link": "www.youtube.com/orange-evolution",
+                                                    "createdAt": "2022-01-06T03:38:35.466Z",
+                                                    "categoryId": "cla3uqcmz2242xk04ynowvarf"
+                                                },
+                                                {
+                                                    "id":"cla2uqcmg8262xk04ynowlarf",
+                                                    "title": "Aula 2",
+                                                    "contentType": "Artigo",
+                                                    "author": "Orange Evolution",
+                                                    "link": "www.orangevolution.com",
+                                                    "createdAt": "2022-01-06T03:38:35.466Z",
+                                                    "categoryId": "cla3uqcmz2242xk04ynowvarf"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                "userTrackClasses": [
+                                    {
+                                        "classId": "clafvld6p001jxc0497nlvu38",
+                                        "userId": "cla4bwcmi0062xk04ynunvarf",
+                                        "createdAt": "2022-11-14T01:37:14.488Z"
+                                    },
+                                    {
+                                        "classId": "clladfnbsdsflac0497nlvu38",
+                                        "userId": "clasdfsadf062xk04ynunvarf",
+                                        "createdAt": "2022-11-14T01:37:14.488Z"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "InternalServerError": {
+                "description": "Internal server error"
             }
         }
     }
