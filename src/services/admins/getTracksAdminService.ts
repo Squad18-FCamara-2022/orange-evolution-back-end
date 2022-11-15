@@ -26,7 +26,7 @@ class GetTracksAdminService {
     if (!user) {
       throw new AppError(
         "only admin users can access the tracks informations",
-        401
+        403
       );
     }
 

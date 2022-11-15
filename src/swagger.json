@@ -1,388 +1,533 @@
 {
-    "openapi": "3.0.0",
-    "info": {
-        "title": "Orange Evolution SQD18 Documentation",
-        "description": "This is an API Education",
-        "version": "1.0.0",
-        "contact": {
-            "email": "squad18hackathonfcamara@gmail.com"
-        },
-        "url":"https://orange-evolution-sqd18-backend.herokuapp.com"
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Orange Evolution SQD18 Documentation",
+    "description": "This is an API Education",
+    "version": "1.0.0",
+    "contact": {
+      "email": "squad18hackathonfcamara@gmail.com"
     },
-    "servers": [{
-        "url": "https://orange-evolution-sqd18-backend.herokuapp.com",
-        "description": "Production server"
+    "url": "https://orange-evolution-sqd18-backend.herokuapp.com"
+  },
+  "servers": [
+    {
+      "url": "https://orange-evolution-sqd18-backend.herokuapp.com",
+      "description": "Production server"
     },
     {
-        "url": "http://localhost:4000",
-        "description": "Local server"
+      "url": "http://localhost:4000",
+      "description": "Local server"
     }
-],
-    "paths": {
-        "/signup": {
-            "post": {
-                "tags": ["Common routes"],
-                "summary": "Create a new account",
-                "description": "Create a new account on Orange Evolution SQD18 education platform.",
-                "requestBody": {
-                    "content": {
-                        "application/json" : {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    },
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "string"
-                                    },
-                                    "confirmPassword": {
-                                        "type": "string"
-                                    }
-                                },
-                                "example": {
-                                    "name": "Jhon Doe",
-                                    "email": "johndoe@gmail.com",
-                                    "password": "123456",
-                                    "confirmPassword": "123456"
-                                }
-                            }
-                        }
-                    }
+  ],
+  "paths": {
+    "/signup": {
+      "post": {
+        "tags": ["Common routes"],
+        "summary": "Create a new account",
+        "description": "Create a new account on Orange Evolution SQD18 education platform.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "confirmPassword": {
+                    "type": "string"
+                  }
                 },
-                "responses": {
-                    "201": {
-                        "description": "success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type":"object",
-                                    "example": {
-                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
-                                        "user": {
-                                            "id": "cla8uqcmz9091xk04ynowvarf",
-                                            "name": "John Doe",
-                                            "role": "user"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "$ref": "#components/responses/SomeRequestParamNotFound"
-                    },
-                    "409": {
-                        "description": "Email already in use"
-                    },
-                    "500": {
-                        "$ref": "#components/responses/InternalServerError"
-                    }
+                "example": {
+                  "name": "Jhon Doe",
+                  "email": "johndoe@gmail.com",
+                  "password": "123456",
+                  "confirmPassword": "123456"
                 }
+              }
             }
-        },
-        "/login": {
-            "post": {
-                "tags": ["Common routes"],
-                "summary": "Login route",
-                "description": "Login on Orange Evolution Platform",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "email": {
-                                        "type": "string"
-                                    },
-                                    "password": {
-                                        "type": "object"
-                                    }
-                                },
-                                "example": {
-                                    "email": "johndoe@gmail.com",
-                                    "password": "123456"
-                                }
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Login success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type":"object",
-                                    "example": {
-                                        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
-                                        "user": {
-                                            "id": "cla8uqcmz9091xk04ynowvarf",
-                                            "name": "John Doe",
-                                            "role": "user"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "$ref": "#components/responses/SomeRequestParamNotFound"
-                    },
-                    "403": {
-                        "description": "Wrong Credentials"
-                    },
-                    "500": {
-                        "$ref": "#components/responses/InternalServerError"
-                    }
-                }
-            }
-        },
-        "/getUserTrack/{id}":{
-            "get": {
-                "tags": ["Users routes"],
-                "summary": "Get User Track",
-                "description": "Get user content trail, with all classes in the trail and classes the user has already completed",
-                "security": [
-                    { "bearerAuth": []}
-                  ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of the content track that the user wants to fetch the classes",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "$ref":"#components/responses/GetUserTrackResponse"
-                    },
-                    "401": {
-                        "$ref": "#components/responses/UnauthorizedError"
-                    },
-                    "404": {
-                        "description": "track does not exist"
-                    },
-                    "422": {
-                        "$ref": "#components/responses/SomeRequestParamNotFound"
-                    },
-                    "500": {
-                        "$ref": "#components/responses/InternalServerError"
-                    }
-                }
-            }
-        },
-        "/createUserClass/{id}": {
-            "post": {
-                "tags": ["Users routes"],
-                "summary": "Create a new User Class",
-                "description": "Create a new user class when user ends a class",
-                "security": [
-                    {"bearerAuth": []}
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "id of class finished by user",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "userClass created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type":"object",
-                                    "example": {
-                                        "message": "user class created successfully"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "$ref": "#components/responses/UnauthorizedError"
-                    },
-                    "404": {
-                        "description": "class does not exist"
-                    },
-                    "409": {
-                        "description": "user class already exists"
-                    },
-                    "422": {
-                        "$ref": "#components/responses/SomeRequestParamNotFound"
-                    },
-                    "500": {
-                        "$ref": "#components/responses/InternalServerError"
-                    }
-                }
-            }
-        },
-        "/deleteUserClass/{id}": {
-            "delete": {
-                "tags": ["Users routes"],
-                "summary": "Delete user class",
-                "description": "delete a class from the userOnClasses table",
-                "security": [
-                    {"bearerAuth": []}
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "class id to be deleted",
-                        "required": true,
-                        "schema": {
-                            "type": "string"
-                        },
-                        "style": "simple"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "example": {
-                                        "message": "user class deleted successfully"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "$ref": "#components/responses/UnauthorizedError"
-                    },
-                    "404": {
-                        "description": "class does not exist"
-                    },
-                    "422": {
-                        "$ref": "#components/responses/SomeRequestParamNotFound"
-                    },
-                    "500": {
-                        "$ref": "#components/responses/InternalServerError"
-                    }
-                }
-            }
-        }
-    },
-    "components": {
-        "securitySchemes": {
-            "bearerAuth": {
-                "type": "http",
-                "scheme": "Bearer",
-                "bearerFormat": "JWT"
-            }
+          }
         },
         "responses": {
-            "UnauthorizedError": {
-                "description": "Access token is missing or invalid"
-            },
-            "GetUserTrackResponse": {
-                "description": "success",
-                "content": {
-                    "application/json": {
-                        "schema": {
-                            "type":"object",
-                            "example": {
-                                "trackDetails": {
-                                    "id": "cla8uqcmz9091xk04hnobvarf",
-                                    "name": "FullStack",
-                                    "description": "Trilha para quem deseja aprender sobre desenvolvimento FullStack",
-                                    "createdAt": "2022-11-09T03:38:35.466Z",
-                                    "author": "Amanda Pazetti",
-                                    "categories": [
-                                        {
-                                            "id": "cla9uqcmz2022xk04ynowvarf",
-                                            "name": "Conceitos Básicos",
-                                            "TrackId": "cla8uqcmz9091xk04hnobvarf",
-                                            "classes": [
-                                                {
-                                                    "id":"cla2uqcmg1892xk04ynowlarf",
-                                                    "title": "Aula 1",
-                                                    "contentType": "Vídeo",
-                                                    "author": "Orange Evolution",
-                                                    "link": "www.youtube.com/orange-evolution",
-                                                    "createdAt": "2022-01-06T03:38:35.466Z",
-                                                    "categoryId": "cla9uqcmz2022xk04ynowvarf"
-                                                },
-                                                {
-                                                    "id":"cla2uqcmg8262xk04ynowlarf",
-                                                    "title": "Aula 2",
-                                                    "contentType": "Artigo",
-                                                    "author": "Orange Evolution",
-                                                    "link": "www.orangevolution.com",
-                                                    "createdAt": "2022-01-06T03:38:35.466Z",
-                                                    "categoryId": "cla9uqcmz2022xk04ynowvarf"
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "id": "cla3uqcmz2242xk04ynowvarf",
-                                            "name": "Avançado",
-                                            "TrackId": "cla8uqcmz9091xk04hnobvarf",
-                                            "classes": [
-                                                {
-                                                    "id":"cla2uasfasg1892xk0gacowlarf",
-                                                    "title": "Aula 1",
-                                                    "contentType": "Vídeo",
-                                                    "author": "Orange Evolution",
-                                                    "link": "www.youtube.com/orange-evolution",
-                                                    "createdAt": "2022-01-06T03:38:35.466Z",
-                                                    "categoryId": "cla3uqcmz2242xk04ynowvarf"
-                                                },
-                                                {
-                                                    "id":"cla2uqcmg8262xk04ynowlarf",
-                                                    "title": "Aula 2",
-                                                    "contentType": "Artigo",
-                                                    "author": "Orange Evolution",
-                                                    "link": "www.orangevolution.com",
-                                                    "createdAt": "2022-01-06T03:38:35.466Z",
-                                                    "categoryId": "cla3uqcmz2242xk04ynowvarf"
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                },
-                                "userTrackClasses": [
-                                    {
-                                        "classId": "clafvld6p001jxc0497nlvu38",
-                                        "userId": "cla4bwcmi0062xk04ynunvarf",
-                                        "createdAt": "2022-11-14T01:37:14.488Z"
-                                    },
-                                    {
-                                        "classId": "clladfnbsdsflac0497nlvu38",
-                                        "userId": "clasdfsadf062xk04ynunvarf",
-                                        "createdAt": "2022-11-14T01:37:14.488Z"
-                                    }
-                                ]
-                            }
-                        }
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
+                    "user": {
+                      "id": "cla8uqcmz9091xk04ynowvarf",
+                      "name": "John Doe",
+                      "role": "user"
                     }
+                  }
                 }
-            },
-            "InternalServerError": {
-                "description": "Internal server error"
-            },
-            "SomeRequestParamNotFound": {
-                "description": "Some request params not found"
+              }
             }
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "409": {
+            "description": "Email already in use"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
         }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Common routes"],
+        "summary": "Login route",
+        "description": "Login on Orange Evolution Platform",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "object"
+                  }
+                },
+                "example": {
+                  "email": "johndoe@gmail.com",
+                  "password": "123456"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Login success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Im5hbWUiOiJMdWNhcyBFdmVyZXN0IiwiaWQiOiJjbGE4YndjbWkwMDAyeGswNHludW52YXJmIn0sImlhdCI6MTY2ODEzMjQ1OCwiZXhwIjoxNjY4MjE4ODU4LCJzdWIiOiJjbGE4YndjbWkwMDAyeGswKASHDkhsdJDksumIn0.Ovo-SnvJq_u5lYD_sRAlobsiG7n-QmEX9I9rPBVLPeM",
+                    "user": {
+                      "id": "cla8uqcmz9091xk04ynowvarf",
+                      "name": "John Doe",
+                      "role": "user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "403": {
+            "description": "Wrong Credentials"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/getUserTrack/{id}": {
+      "get": {
+        "tags": ["Users routes"],
+        "summary": "Get User Track",
+        "description": "Get user content trail, with all classes in the trail and classes the user has already completed",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of the content track that the user wants to fetch the classes",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#components/responses/GetUserTrackResponse"
+          },
+          "401": {
+            "$ref": "#components/responses/UnauthorizedError"
+          },
+          "404": {
+            "description": "track does not exist"
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/createUserClass/{id}": {
+      "post": {
+        "tags": ["Users routes"],
+        "summary": "Create a new User Class",
+        "description": "Create a new user class when user ends a class",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id of class finished by user",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "userClass created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "user class created successfully"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/UnauthorizedError"
+          },
+          "404": {
+            "description": "class does not exist"
+          },
+          "409": {
+            "description": "user class already exists"
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/deleteUserClass/{id}": {
+      "delete": {
+        "tags": ["Users routes"],
+        "summary": "Delete user class",
+        "description": "delete a class from the userOnClasses table",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "class id to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "user class deleted successfully"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/UnauthorizedError"
+          },
+          "404": {
+            "description": "class does not exist"
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/getTracksAdmin": {
+      "get": {
+        "tags": ["Admin routes"],
+        "summary": "Get all tracks of platform",
+        "description": "get all content tracks, with their respective categories, classes and the number of people who completed each class",
+        "responses": {
+          "200": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#components/responses/GetTracksAdminResponse"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/UnauthorizedError"
+          },
+          "403": {
+            "description": "Only admin users can access the tracks informations"
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
     }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "Bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "Class": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "contentType": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          },
+          "duration": {
+            "type": "string"
+          },
+          "link": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "categoryId": {
+            "type": "string"
+          }
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "trackId": {
+            "type": "string"
+          }
+        }
+      },
+      "Track": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "author": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "responses": {
+      "UnauthorizedError": {
+        "description": "Access token is missing invalid"
+      },
+      "GetUserTrackResponse": {
+        "description": "success",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "example": {
+                "trackDetails": {
+                  "id": "cla8uqcmz9091xk04hnobvarf",
+                  "name": "FullStack",
+                  "description": "Trilha para quem deseja aprender sobre desenvolvimento FullStack",
+                  "createdAt": "2022-11-09T03:38:35.466Z",
+                  "author": "Amanda Pazetti",
+                  "categories": [
+                    {
+                      "id": "cla9uqcmz2022xk04ynowvarf",
+                      "name": "Conceitos Básicos",
+                      "TrackId": "cla8uqcmz9091xk04hnobvarf",
+                      "classes": [
+                        {
+                          "id": "cla2uqcmg1892xk04ynowlarf",
+                          "title": "Aula 1",
+                          "contentType": "Vídeo",
+                          "author": "Orange Evolution",
+                          "link": "www.youtube.com/orange-evolution",
+                          "createdAt": "2022-01-06T03:38:35.466Z",
+                          "categoryId": "cla9uqcmz2022xk04ynowvarf"
+                        },
+                        {
+                          "id": "cla2uqcmg8262xk04ynowlarf",
+                          "title": "Aula 2",
+                          "contentType": "Artigo",
+                          "author": "Orange Evolution",
+                          "link": "www.orangevolution.com",
+                          "createdAt": "2022-01-06T03:38:35.466Z",
+                          "categoryId": "cla9uqcmz2022xk04ynowvarf"
+                        }
+                      ]
+                    },
+                    {
+                      "id": "cla3uqcmz2242xk04ynowvarf",
+                      "name": "Avançado",
+                      "TrackId": "cla8uqcmz9091xk04hnobvarf",
+                      "classes": [
+                        {
+                          "id": "cla2uasfasg1892xk0gacowlarf",
+                          "title": "Aula 1",
+                          "contentType": "Vídeo",
+                          "author": "Orange Evolution",
+                          "link": "www.youtube.com/orange-evolution",
+                          "createdAt": "2022-01-06T03:38:35.466Z",
+                          "categoryId": "cla3uqcmz2242xk04ynowvarf"
+                        },
+                        {
+                          "id": "cla2uqcmg8262xk04ynowlarf",
+                          "title": "Aula 2",
+                          "contentType": "Artigo",
+                          "author": "Orange Evolution",
+                          "link": "www.orangevolution.com",
+                          "createdAt": "2022-01-06T03:38:35.466Z",
+                          "categoryId": "cla3uqcmz2242xk04ynowvarf"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "userTrackClasses": [
+                  {
+                    "classId": "clafvld6p001jxc0497nlvu38",
+                    "userId": "cla4bwcmi0062xk04ynunvarf",
+                    "createdAt": "2022-11-14T01:37:14.488Z"
+                  },
+                  {
+                    "classId": "clladfnbsdsflac0497nlvu38",
+                    "userId": "clasdfsadf062xk04ynunvarf",
+                    "createdAt": "2022-11-14T01:37:14.488Z"
+                  }
+                ]
+              }
+            }
+          }
+        }
+      },
+      "InternalServerError": {
+        "description": "Internal server error"
+      },
+      "SomeRequestParamNotFound": {
+        "description": "Some request params not found"
+      },
+      "GetTracksAdminResponse": {
+        "type": "object",
+        "example": {
+          "id": "cla93d3yi0000vw8nti3frpr0",
+          "name": "FullStack",
+          "description": "Trilha para quem deseja ser desenvolvedor FullStack",
+          "createdAt": "2022-11-09T03:38:35.466Z",
+          "author": "Amanda",
+          "categories": [
+            {
+              "id": "cla93g4hc0006vw8n8qgbqcrq",
+              "name": "Parte 1",
+              "trackId": "cla93d3yi0000vw8nti3frpr0",
+              "classes": [
+                {
+                  "id": "clabahsr30000vw066ytn3q8a",
+                  "title": "Introdução ao node",
+                  "contentType": "vídeo",
+                  "author": "Rocketseat",
+                  "duration": 20,
+                  "link": "www.youtube.com/rocketseat",
+                  "createdAt": "2022-11-10T16:33:43.887Z",
+                  "categoryId": "cla93g4hc0006vw8n8qgbqcrq",
+                  "_count": {
+                    "UsersOnClasses": 2
+                  }
+                },
+                {
+                  "id": "clabou2ta0000vw2yuvs4yy9i",
+                  "title": "Introdução ao React",
+                  "contentType": "Artigo",
+                  "author": "Cubos Academy",
+                  "duration": 5,
+                  "link": "www.cubosacademy.com.br",
+                  "createdAt": "2022-11-10T23:15:11.422Z",
+                  "categoryId": "cla93g4hc0006vw8n8qgbqcrq",
+                  "_count": {
+                    "UsersOnClasses": 0
+                  }
+                }
+              ]
+            },
+            {
+              "id": "cla93gfd50007vw8ni78rkg29",
+              "name": "Parte 2",
+              "trackId": "cla93d3yi0000vw8nti3frpr0",
+              "classes": []
+            }
+          ]
+        }
+      }
+    }
+  }
 }
