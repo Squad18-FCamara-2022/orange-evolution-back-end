@@ -1,14 +1,17 @@
+import { Class } from "@prisma/client";
 import prisma from "../../prisma";
 import { AppError } from "../../utils/AppError";
 
 interface IDeleteUserClassResponse {
   message: string;
+  userCategoryDoneClasses: Class[];
 }
 
 class DeleteUserClassService {
   async execute(
     userId: string,
-    classId: string
+    classId: string,
+    categoryId: string
   ): Promise<IDeleteUserClassResponse> {
     // validar se os parâmetros foram recebidos
     if (!userId) {
@@ -39,7 +42,25 @@ class DeleteUserClassService {
       },
     });
 
-    return { message: "class deleted succesfully" };
+    // buscar todas as aulas que o usuário já fez da categoria
+    const userCategoryDoneClasses = await prisma.class.findMany({
+      where: {
+        AND: [
+          {
+            categoryId,
+          },
+          {
+            UsersOnClasses: {
+              some: {
+                userId,
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    return { message: "class deleted succesfully", userCategoryDoneClasses };
   }
 }
 

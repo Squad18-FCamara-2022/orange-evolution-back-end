@@ -4,6 +4,9 @@ import { AppError } from "../../utils/AppError";
 
 interface IDeleteUserClassRequest extends Request {
   userId: string;
+  query: {
+    categoryId: string;
+  };
 }
 
 class DeleteUserClassController {
@@ -12,13 +15,16 @@ class DeleteUserClassController {
       // pegar o id do usuário adicionado no middleware
       const { userId } = request;
 
+      // pegar id da categoria da aula na query
+      const { categoryId } = request.query;
+
       // pegar o id da aula dos route params
       const { id: classId } = request.params;
 
       // instanciar camadade serviço
       const service = new DeleteUserClassService();
 
-      const result = await service.execute(userId, classId);
+      const result = await service.execute(userId, classId, categoryId);
 
       return response.status(200).json(result);
     } catch (error) {

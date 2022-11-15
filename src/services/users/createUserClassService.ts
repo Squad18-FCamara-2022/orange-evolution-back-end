@@ -1,13 +1,16 @@
 import { AppError } from "../../utils/AppError";
 import prisma from "../../prisma";
+import { Class } from "@prisma/client";
 
 interface ICreateUserClassService {
   message: string;
+  userCategoryDoneClasses: Class[];
 }
 class CreateUserClassService {
   async execute(
     userId: string,
-    classId: string
+    classId: string,
+    categoryId: string
   ): Promise<ICreateUserClassService> {
     // validar se os parâmetros foram recebidos
     if (!userId) {
@@ -54,7 +57,28 @@ class CreateUserClassService {
       },
     });
 
-    return { message: "user class created successfully" };
+    // buscar todas as aulas que o usuário já fez da categoria
+    const userCategoryDoneClasses = await prisma.class.findMany({
+      where: {
+        AND: [
+          {
+            categoryId,
+          },
+          {
+            UsersOnClasses: {
+              some: {
+                userId,
+              },
+            },
+          },
+        ],
+      },
+    });
+
+    return {
+      message: "user class created successfully",
+      userCategoryDoneClasses,
+    };
   }
 }
 

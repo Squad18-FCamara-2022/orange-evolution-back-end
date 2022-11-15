@@ -4,6 +4,9 @@ import { AppError } from "../../utils/AppError";
 
 interface ICreateUserClassRequest extends Request {
   userId: string;
+  query: {
+    categoryId: string;
+  };
 }
 
 class CreateUserClassController {
@@ -12,12 +15,15 @@ class CreateUserClassController {
       // pegar o id do usuário adicionado no middleware
       const { userId } = request;
 
+      // pegar id da categoria da aula na query
+      const { categoryId } = request.query;
+
       // pegar o id da aula dos route params
       const { id: classId } = request.params;
 
       const service = new CreateUserClassService();
 
-      const result = await service.execute(userId, classId);
+      const result = await service.execute(userId, classId, categoryId);
 
       return response.status(201).json(result);
     } catch (error) {
