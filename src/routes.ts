@@ -48,7 +48,7 @@ router.get(
 
 // rota para o admin criar uma aula nova
 router.post(
-  "/createNewClassAdmin",
+  "/createNewClassAdmin/:id",
   ensureAuthenticated,
   new CreateNewClassAdminController().handle
 );

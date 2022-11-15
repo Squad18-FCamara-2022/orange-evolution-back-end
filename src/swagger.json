@@ -280,6 +280,7 @@
       "get": {
         "tags": ["Admin routes"],
         "summary": "Get all tracks of platform",
+        "security": [{ "bearerAuth": [] }],
         "description": "get all content tracks, with their respective categories, classes and the number of people who completed each class",
         "responses": {
           "200": {
@@ -300,6 +301,92 @@
           },
           "403": {
             "description": "Only admin users can access the tracks informations"
+          },
+          "422": {
+            "$ref": "#components/responses/SomeRequestParamNotFound"
+          },
+          "500": {
+            "$ref": "#components/responses/InternalServerError"
+          }
+        }
+      }
+    },
+    "/createNewClassAdmin/{id}": {
+      "post": {
+        "tags": ["Admin routes"],
+        "summary": "Create a new Class on tracks",
+        "description": "Route for admin users create a new class for all users",
+        "security": [{ "bearerAuth": [] }],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Category id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "contentType": {
+                    "type": "string"
+                  },
+                  "author": {
+                    "type": "string"
+                  },
+                  "duration": {
+                    "type": "integer"
+                  },
+                  "link": {
+                    "type": "string"
+                  },
+                  "categoryId": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "title": "Aula nova",
+                "contentType": "Vídeo",
+                "author": "Fábio Camara",
+                "duration": 4,
+                "link": "https://www.youtube.com/fcamara"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "class created successfully"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#components/responses/UnauthorizedError"
+          },
+          "403": {
+            "description": "Only admin users can create new classes"
+          },
+          "404": {
+            "description": "category does not exist"
           },
           "422": {
             "$ref": "#components/responses/SomeRequestParamNotFound"
