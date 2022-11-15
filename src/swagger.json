@@ -195,6 +195,16 @@
               "type": "string"
             },
             "style": "simple"
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "id of the category that belongs to the class to be created",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
           }
         ],
         "responses": {
@@ -203,9 +213,42 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
+                  "items": {},
                   "example": {
-                    "message": "user class created successfully"
+                    "message": "user class created successfully",
+                    "userCategoryDoneClasses": [
+                      {
+                        "id": "clahmdgli000csw043214uai0",
+                        "title": "Curso Javascript + 14 Mini-Projetos",
+                        "contentType": "video",
+                        "author": "Udemy",
+                        "duration": 16531,
+                        "link": "https://www.youtube.com/watch?v=i6Oi-YtXnAU&ab_channel=DevAprender",
+                        "createdAt": "2022-11-15T02:52:53.959Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      },
+                      {
+                        "id": "clahmk5k1000dsw04egmdmrfk",
+                        "title": "Curso de Java",
+                        "contentType": "Curso",
+                        "author": "Curso em Video",
+                        "duration": 41800,
+                        "link": "https://www.youtube.com/playlist?list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR",
+                        "createdAt": "2022-11-15T02:58:06.242Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      },
+                      {
+                        "id": "clahsvn82002csw0450h1rh13",
+                        "title": "Curso de Sass",
+                        "contentType": "Curso",
+                        "author": "Amanda Vilela",
+                        "duration": 6300,
+                        "link": "https://www.youtube.com/playlist?list=PL97KElaimHeGRtfkksKwxg6IGVZi_cR7J",
+                        "createdAt": "2022-11-15T05:55:00.051Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      }
+                    ]
                   }
                 }
               }
@@ -245,6 +288,16 @@
               "type": "string"
             },
             "style": "simple"
+          },
+          {
+            "name": "categoryId",
+            "in": "query",
+            "description": "id of the category that belongs to the class to be deleted",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
           }
         ],
         "responses": {
@@ -253,9 +306,42 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
+                  "type": "array",
+                  "items": {},
                   "example": {
-                    "message": "user class deleted successfully"
+                    "message": "user class deleted successfully",
+                    "userCategoryDoneClasses": [
+                      {
+                        "id": "clahmdgli000csw043214uai0",
+                        "title": "Curso Javascript + 14 Mini-Projetos",
+                        "contentType": "video",
+                        "author": "Udemy",
+                        "duration": 16531,
+                        "link": "https://www.youtube.com/watch?v=i6Oi-YtXnAU&ab_channel=DevAprender",
+                        "createdAt": "2022-11-15T02:52:53.959Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      },
+                      {
+                        "id": "clahmk5k1000dsw04egmdmrfk",
+                        "title": "Curso de Java",
+                        "contentType": "Curso",
+                        "author": "Curso em Video",
+                        "duration": 41800,
+                        "link": "https://www.youtube.com/playlist?list=PLHz_AreHm4dkI2ZdjTwZA4mPMxWTfNSpR",
+                        "createdAt": "2022-11-15T02:58:06.242Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      },
+                      {
+                        "id": "clahsvn82002csw0450h1rh13",
+                        "title": "Curso de Sass",
+                        "contentType": "Curso",
+                        "author": "Amanda Vilela",
+                        "duration": 6300,
+                        "link": "https://www.youtube.com/playlist?list=PL97KElaimHeGRtfkksKwxg6IGVZi_cR7J",
+                        "createdAt": "2022-11-15T05:55:00.051Z",
+                        "categoryId": "claeia9pw0000vwdh7n19kab8"
+                      }
+                    ]
                   }
                 }
               }
