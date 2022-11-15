@@ -12,6 +12,13 @@ class GetUserTrackService {
     trackId: string,
     userId: string
   ): Promise<IGetUserTrackServiceResponse> {
+    // verificar se os parâmetros não estão undefined
+    if (!trackId) {
+      throw new AppError("trackId not found on request body", 422);
+    } else if (!userId) {
+      throw new AppError("userId not found on request params", 422);
+    }
+
     // buscar no banco de dados todas as trilhas
     const trackDetails = await prisma.track.findFirst({
       where: {

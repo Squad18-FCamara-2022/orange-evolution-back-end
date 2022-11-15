@@ -21,7 +21,7 @@
     "paths": {
         "/signup": {
             "post": {
-                "tags": ["All"],
+                "tags": ["Common routes"],
                 "summary": "Create a new account",
                 "description": "Create a new account on Orange Evolution SQD18 education platform.",
                 "requestBody": {
@@ -73,7 +73,7 @@
                         }
                     },
                     "422": {
-                        "description": "Some request body params not found"
+                        "$ref": "#components/responses/SomeRequestParamNotFound"
                     },
                     "409": {
                         "description": "Email already in use"
@@ -86,7 +86,7 @@
         },
         "/login": {
             "post": {
-                "tags": ["All"],
+                "tags": ["Common routes"],
                 "summary": "Login route",
                 "description": "Login on Orange Evolution Platform",
                 "requestBody": {
@@ -130,7 +130,7 @@
                         }
                     },
                     "422": {
-                        "description": "Some request body params not found"
+                        "$ref": "#components/responses/SomeRequestParamNotFound"
                     },
                     "403": {
                         "description": "Wrong Credentials"
@@ -143,7 +143,7 @@
         },
         "/getUserTrack/{id}":{
             "get": {
-                "tags": ["Users"],
+                "tags": ["Users routes"],
                 "summary": "Get User Track",
                 "description": "Get user content trail, with all classes in the trail and classes the user has already completed",
                 "security": [
@@ -170,6 +170,61 @@
                     },
                     "404": {
                         "description": "track does not exist"
+                    },
+                    "422": {
+                        "$ref": "#components/responses/SomeRequestParamNotFound"
+                    },
+                    "500": {
+                        "$ref": "#components/responses/InternalServerError"
+                    }
+                }
+            }
+        },
+        "/createUserClass/{id}": {
+            "post": {
+                "tags": ["Users routes"],
+                "summary": "Create a new User Class",
+                "description": "Create a new user class when user ends a class",
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of class finished by user",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "userClass created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type":"object",
+                                    "example": {
+                                        "message": "user class created successfully"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "class does not exist"
+                    },
+                    "409": {
+                        "description": "user class already exists"
+                    },
+                    "422": {
+                        "$ref": "#components/responses/SomeRequestParamNotFound"
                     },
                     "500": {
                         "$ref": "#components/responses/InternalServerError"
@@ -275,6 +330,9 @@
             },
             "InternalServerError": {
                 "description": "Internal server error"
+            },
+            "SomeRequestParamNotFound": {
+                "description": "Some request params not found"
             }
         }
     }
