@@ -17,6 +17,8 @@ class CreateUserClassService {
       throw new AppError("userId not found on request param", 422);
     } else if (!classId) {
       throw new AppError("classId not found on request params", 422);
+    } else if (!categoryId) {
+      throw new AppError("categoryId not found on request query params", 422);
     }
 
     // verificar se o usuário já fez aquela aula
