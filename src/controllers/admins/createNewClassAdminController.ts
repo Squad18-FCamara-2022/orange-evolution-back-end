@@ -9,8 +9,9 @@ interface ICreateNewClassAdminRequest extends Request {
 class CreateNewClassAdminController {
   async handle(request: ICreateNewClassAdminRequest, response: Response) {
     try {
-      const { title, contentType, author, duration, link, categoryId } =
-        request.body;
+      const { title, contentType, author, duration, link } = request.body;
+
+      const { id: categoryId } = request.params;
 
       const { userId } = request;
 

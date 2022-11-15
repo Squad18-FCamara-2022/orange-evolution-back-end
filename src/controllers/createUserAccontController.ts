@@ -7,7 +7,8 @@ class CreateUserAccountController {
   async handle(request: Request, response: Response): Promise<Response> {
     try {
       // definir as contantes por desestruturação
-      const { name, email, password, confirmPassword } = request.body;
+      const { name, email, password, confirmPassword, role } = request.body;
+
       /* daria no mesmo fazer o seguinte:
       const name = request.body.name
       const email = request.body.email
@@ -23,6 +24,7 @@ class CreateUserAccountController {
         email,
         password,
         confirmPassword,
+        role,
       });
 
       return response.status(201).json(result);

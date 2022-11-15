@@ -31,7 +31,7 @@ class CreateUserClassService {
     });
 
     if (usersOnClassAlreadyExists) {
-      throw new AppError("class already exist", 409);
+      throw new AppError("userClass already exists", 409);
     }
 
     // verificar se a aula existe
@@ -54,7 +54,7 @@ class CreateUserClassService {
       },
     });
 
-    return { message: "class created successfully" };
+    return { message: "user class created successfully" };
   }
 }
 

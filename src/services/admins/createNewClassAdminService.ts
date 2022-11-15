@@ -57,7 +57,18 @@ class CreateNewClassAdminService {
 
     // se não for admin retornar um erro
     if (!user) {
-      throw new AppError("only admins users can create new classes", 401);
+      throw new AppError("only admins users can create new classes", 403);
+    }
+
+    // verificar se a categoria existe
+    const category = await prisma.category.findFirst({
+      where: {
+        id: categoryId,
+      },
+    });
+
+    if (!category) {
+      throw new AppError("category does not exist", 404);
     }
 
     // criar aula no banco
