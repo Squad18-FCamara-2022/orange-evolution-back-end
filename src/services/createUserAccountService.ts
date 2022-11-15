@@ -1,15 +1,17 @@
 import { AppError } from "../utils/AppError";
 import prisma from "../prisma";
 import { sign } from "jsonwebtoken";
+import { Role } from "@prisma/client";
 
 interface ICreateUserAccountService {
   name: string;
   email: string;
   password: string;
   confirmPassword: string;
+  role: Role;
 }
 
-interface ICreateAccounResponse {
+interface ICreateAccountResponse {
   token: string;
   user: {
     id: string;
@@ -24,7 +26,8 @@ class CreateUserAccountService {
     email,
     name,
     password,
-  }: ICreateUserAccountService): Promise<ICreateAccounResponse> {
+    role,
+  }: ICreateUserAccountService): Promise<ICreateAccountResponse> {
     // verificar se todos os parâmetos foram enviados
     if (!email) {
       throw new AppError("email not found on request body", 422);
@@ -34,9 +37,11 @@ class CreateUserAccountService {
       throw new AppError("confirmPassword not found on request body", 422);
     } else if (!name) {
       throw new AppError("name not found on request body", 422);
+    } else if (!role) {
+      throw new AppError("role not found on request body", 422);
     }
 
-    // verificar se password e confirmPassword são iguais
+    // verificar se password e confirmPassword são iguais (não faremos criptografia)
     if (password !== confirmPassword) {
       throw new AppError("confirmPassword different from password", 422);
     }
@@ -62,6 +67,7 @@ class CreateUserAccountService {
         email,
         name,
         password,
+        role,
       },
     });
 
