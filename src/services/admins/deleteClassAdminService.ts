@@ -29,6 +29,18 @@ class DeleteClassAdminService {
       throw new AppError("only admins can delete classes", 401);
     }
 
+    // verificar se a aula existe
+    const classToDelete = await prisma.class.findFirst({
+      where: {
+        id: classId,
+      },
+    });
+
+    // se não existe retornar um erro
+    if (!classToDelete) {
+      throw new AppError("class does not exist", 404);
+    }
+
     // deletar aula do banco
     await prisma.class.delete({
       where: {
