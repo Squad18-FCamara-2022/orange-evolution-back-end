@@ -231,6 +231,55 @@
                     }
                 }
             }
+        },
+        "/deleteUserClass/{id}": {
+            "delete": {
+                "tags": ["Users routes"],
+                "summary": "Delete user class",
+                "description": "delete a class from the userOnClasses table",
+                "security": [
+                    {"bearerAuth": []}
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "class id to be deleted",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "style": "simple"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "example": {
+                                        "message": "user class deleted successfully"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "class does not exist"
+                    },
+                    "422": {
+                        "$ref": "#components/responses/SomeRequestParamNotFound"
+                    },
+                    "500": {
+                        "$ref": "#components/responses/InternalServerError"
+                    }
+                }
+            }
         }
     },
     "components": {
