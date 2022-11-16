@@ -7,11 +7,11 @@
     "contact": {
       "email": "squad18hackathonfcamara@gmail.com"
     },
-    "url": "https://orange-evolution-sqd18-backend.herokuapp.com"
+    "url": "https://sqd18-orange-evolution-backend.herokuapp.com"
   },
   "servers": [
     {
-      "url": "https://orange-evolution-sqd18-backend.herokuapp.com",
+      "url": "https://sqd18-orange-evolution-backend.herokuapp.com/",
       "description": "Production server"
     },
     {
@@ -42,13 +42,18 @@
                   },
                   "confirmPassword": {
                     "type": "string"
+                  },
+                  "role": {
+                    "type": "string",
+                    "enum": ["user", "admin"]
                   }
                 },
                 "example": {
                   "name": "Jhon Doe",
                   "email": "johndoe@gmail.com",
                   "password": "123456",
-                  "confirmPassword": "123456"
+                  "confirmPassword": "123456",
+                  "role": "user"
                 }
               }
             }
